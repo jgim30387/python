@@ -1,0 +1,688 @@
+    Initial revision of "git", the information manager from hell
+
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git
+$ ls -al
+total 4
+drwxr-xr-x 1 jgim3 197609 0 Nov 17 15:03 ./
+drwxr-xr-x 1 jgim3 197609 0 Nov 17 15:03 ../
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git
+$ git
+usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           [--config-env=<name>=<envvar>] <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone     Clone a repository into a new directory
+   init      Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add       Add file contents to the index
+   mv        Move or rename a file, a directory, or a symlink
+   restore   Restore working tree files
+   rm        Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect    Use binary search to find the commit that introduced a bug
+   diff      Show changes between commits, commit and working tree, etc
+   grep      Print lines matching a pattern
+   log       Show commit logs
+   show      Show various types of objects
+   status    Show the working tree status
+
+grow, mark and tweak your common history
+   branch    List, create, or delete branches
+   commit    Record changes to the repository
+   merge     Join two or more development histories together
+   rebase    Reapply commits on top of another base tip
+   reset     Reset current HEAD to the specified state
+   switch    Switch branches
+   tag       Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch     Download objects and refs from another repository
+   pull      Fetch from and integrate with another repository or a local branch
+   push      Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git
+$ git init
+Initialized empty Git repository in C:/Users/jgim3/Documents/git/.git/
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ ls -al
+total 8
+drwxr-xr-x 1 jgim3 197609 0 Nov 17 15:06 ./
+drwxr-xr-x 1 jgim3 197609 0 Nov 17 15:03 ../
+drwxr-xr-x 1 jgim3 197609 0 Nov 17 15:06 .git/
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ ls -al
+total 9
+drwxr-xr-x 1 jgim3 197609  0 Nov 17 15:09 ./
+drwxr-xr-x 1 jgim3 197609  0 Nov 17 15:03 ../
+drwxr-xr-x 1 jgim3 197609  0 Nov 17 15:06 .git/
+-rw-r--r-- 1 jgim3 197609 15 Nov 17 15:09 test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ cat test.py
+a=1
+print(a)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        test.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git add test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git commit
+[master (root-commit) f61db19] version1
+ 1 file changed, 2 insertions(+)
+ create mode 100644 test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git log
+commit f61db19d242e50cd38d7868c12377955669c89aa (HEAD -> master)
+Date:   Fri Nov 17 15:32:02 2023 +0900
+
+    version1
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   test.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git add test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git commit
+[master e47d95f] this is v2
+ 1 file changed, 1 insertion(+)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git log
+commit e47d95f46b522952424ae69c80c9557d50c55c8b (HEAD -> master)
+Date:   Fri Nov 17 15:42:24 2023 +0900
+
+    this is v2
+
+commit f61db19d242e50cd38d7868c12377955669c89aa
+Date:   Fri Nov 17 15:32:02 2023 +0900
+
+    version1
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ cp test.py f2.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ ls -al
+total 10
+drwxr-xr-x 1 jgim3 197609  0 Nov 17 15:47 ./
+drwxr-xr-x 1 jgim3 197609  0 Nov 17 15:03 ../
+drwxr-xr-x 1 jgim3 197609  0 Nov 17 15:42 .git/
+-rw-r--r-- 1 jgim3 197609 18 Nov 17 15:47 f2.py
+-rw-r--r-- 1 jgim3 197609 18 Nov 17 15:37 test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        f2.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git add f2.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   f2.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git commit
+[master d592037] v3 add file
+ 1 file changed, 3 insertions(+)
+ create mode 100644 f2.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git log
+commit d5920376a4b69175382dd237232c45afaa203021 (HEAD -> master)
+Date:   Fri Nov 17 16:10:29 2023 +0900
+
+    v3 add file
+
+commit e47d95f46b522952424ae69c80c9557d50c55c8b
+Date:   Fri Nov 17 15:42:24 2023 +0900
+
+    this is v2
+
+commit f61db19d242e50cd38d7868c12377955669c89aa
+Date:   Fri Nov 17 15:32:02 2023 +0900
+
+    version1
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ cat test.py
+a=1
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ cat f2.py
+b=3
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   f2.py
+        modified:   test.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git add test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   test.py
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   f2.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git commit
+[master 63c31cc] add only 1 file
+ 1 file changed, 2 deletions(-)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git log
+commit 63c31cc1dd7a34a8747041daea696ca8c82d191e (HEAD -> master)
+Date:   Fri Nov 17 16:43:05 2023 +0900
+
+    add only 1 file
+
+commit d5920376a4b69175382dd237232c45afaa203021
+Date:   Fri Nov 17 16:10:29 2023 +0900
+
+    v3 add file
+
+commit e47d95f46b522952424ae69c80c9557d50c55c8b
+Date:   Fri Nov 17 15:42:24 2023 +0900
+
+    this is v2
+
+commit f61db19d242e50cd38d7868c12377955669c89aa
+Date:   Fri Nov 17 15:32:02 2023 +0900
+
+    version1
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   f2.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ ls -al
+total 10
+drwxr-xr-x 1 jgim3 197609 0 Nov 17 15:47 ./
+drwxr-xr-x 1 jgim3 197609 0 Nov 17 16:22 ../
+drwxr-xr-x 1 jgim3 197609 0 Nov 17 16:46 .git/
+-rw-r--r-- 1 jgim3 197609 3 Nov 17 16:12 f2.py
+-rw-r--r-- 1 jgim3 197609 5 Nov 17 16:12 test.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git log -p
+commit 63c31cc1dd7a34a8747041daea696ca8c82d191e (HEAD -> master)
+Date:   Fri Nov 17 16:43:05 2023 +0900
+
+    add only 1 file
+
+diff --git a/test.py b/test.py
+index b91ff7a..73cdb8b 100644
+--- a/test.py
++++ b/test.py
+@@ -1,3 +1 @@
+ a=1
+-print(a)
+-b=3
+\ No newline at end of file
+
+commit d5920376a4b69175382dd237232c45afaa203021
+Date:   Fri Nov 17 16:10:29 2023 +0900
+
+    v3 add file
+
+diff --git a/f2.py b/f2.py
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git commit -h
+usage: git commit [-a | --interactive | --patch] [-s] [-v] [-u<mode>] [--amend]
+                  [--dry-run] [(-c | -C | --squash) <commit> | --fixup [(amend|reword):]<commit>)]
+                  [-F <file> | -m <msg>] [--reset-author] [--allow-empty]
+                  [--allow-empty-message] [--no-verify] [-e] [--author=<author>]
+                  [--date=<date>] [--cleanup=<mode>] [--[no-]status]
+                  [-i | -o] [--pathspec-from-file=<file> [--pathspec-file-nul]]
+                  [(--trailer <token>[(=|:)<value>])...] [-S[<keyid>]]
+                  [--] [<pathspec>...]
+
+    -q, --quiet           suppress summary after successful commit
+    -v, --verbose         show diff in commit message template
+
+Commit message options
+    -F, --file <file>     read message from file
+    --author <author>     override author for commit
+    --date <date>         override date for commit
+    -m, --message <message>
+                          commit message
+    -c, --reedit-message <commit>
+                          reuse and edit message from specified commit
+    -C, --reuse-message <commit>
+                          reuse message from specified commit
+    --fixup [(amend|reword):]commit
+                          use autosquash formatted message to fixup or amend/reword specified commit
+    --squash <commit>     use autosquash formatted message to squash specified commit
+    --reset-author        the commit is authored by me now (used with -C/-c/--amend)
+    --trailer <trailer>   add custom trailer(s)
+    -s, --signoff         add a Signed-off-by trailer
+    -t, --template <file> use specified template file
+    -e, --edit            force edit of commit
+    --cleanup <mode>      how to strip spaces and #comments from message
+    --status              include status in commit message template
+    -S, --gpg-sign[=<key-id>]
+                          GPG sign commit
+
+Commit contents options
+    -a, --all             commit all changed files
+    -i, --include         add specified files to index for commit
+    --interactive         interactively add files
+    -p, --patch           interactively add changes
+    -o, --only            commit only specified files
+    -n, --no-verify       bypass pre-commit and commit-msg hooks
+    --dry-run             show what would be committed
+    --short               show status concisely
+    --branch              show branch information
+    --ahead-behind        compute full ahead/behind values
+    --porcelain           machine-readable output
+    --long                show status in long format (default)
+    -z, --null            terminate entries with NUL
+    --amend               amend previous commit
+    --no-post-rewrite     bypass post-rewrite hook
+    -u, --untracked-files[=<mode>]
+                          show untracked files, optional modes: all, normal, no. (Default: all)
+    --pathspec-from-file <file>
+                          read pathspec from file
+    --pathspec-file-nul   with --pathspec-from-file, pathspec elements are separated with NUL character
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/git (master)
+$ git commit -am "auto commit"
+[master a3dfc41] auto commit
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub
+$ ls -al
+total 4
+drwxr-xr-x 1 jgim3 197609 0 Nov 18 14:11 ./
+drwxr-xr-x 1 jgim3 197609 0 Nov 18 14:11 ../
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub
+$ git init local
+Initialized empty Git repository in C:/Users/jgim3/Documents/hub/local/.git/
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub
+$ ls -al
+total 4
+drwxr-xr-x 1 jgim3 197609 0 Nov 18 14:12 ./
+drwxr-xr-x 1 jgim3 197609 0 Nov 18 14:11 ../
+drwxr-xr-x 1 jgim3 197609 0 Nov 18 14:12 local/
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub
+$ cd local
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ vim f1.txt
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git add f1.txt
+warning: in the working copy of 'f1.txt', LF will be replaced by CRLF the next time Git touches it
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git commit -m "ver1"
+[master (root-commit) a93fbc3] ver1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 f1.txt
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ cd ..
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub
+$ git init --bare remote
+Initialized empty Git repository in C:/Users/jgim3/Documents/hub/remote/
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub
+$ cd remote
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/remote (BARE:master)
+$ ls -al
+total 11
+drwxr-xr-x 1 jgim3 197609   0 Nov 18 14:17 ./
+drwxr-xr-x 1 jgim3 197609   0 Nov 18 14:17 ../
+-rw-r--r-- 1 jgim3 197609  23 Nov 18 14:17 HEAD
+-rw-r--r-- 1 jgim3 197609 104 Nov 18 14:17 config
+-rw-r--r-- 1 jgim3 197609  73 Nov 18 14:17 description
+drwxr-xr-x 1 jgim3 197609   0 Nov 18 14:17 hooks/
+drwxr-xr-x 1 jgim3 197609   0 Nov 18 14:17 info/
+drwxr-xr-x 1 jgim3 197609   0 Nov 18 14:17 objects/
+drwxr-xr-x 1 jgim3 197609   0 Nov 18 14:17 refs/
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/remote (BARE:master)
+$ cd ..
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub
+$ cd local
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git remote add origin /c/Users/jgim3/Documents/hub/remote
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git remote -v
+origin  C:/Users/jgim3/Documents/hub/remote (fetch)
+origin  C:/Users/jgim3/Documents/hub/remote (push)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git push
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git config --global push.default simple
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git push
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git branch
+* master
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ git push --set-upstream origin master
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 201 bytes | 201.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To C:/Users/jgim3/Documents/hub/remote
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/local (master)
+$ cd ..
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub
+$ cd remote
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/hub/remote (BARE:master)
+$ git log
+commit a93fbc3b469a08fd6b45ac5b679ab518661e355b (HEAD -> master)
+Date:   Sat Nov 18 14:13:20 2023 +0900
+
+    ver1
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents
+$ git clone https://github.com/FireDragonGameStudio/ARIndoorNavigation.git src
+Cloning into 'src'...
+remote: Enumerating objects: 398, done.
+remote: Counting objects: 100% (398/398), done.
+remote: Compressing objects: 100% (242/242), done.
+remote: Total 398 (delta 204), reused 340 (delta 148), pack-reused 0
+Receiving objects: 100% (398/398), 1.68 MiB | 3.84 MiB/s, done.
+Resolving deltas: 100% (204/204), done.
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents
+$ cd src
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/src (main)
+$ git log
+commit 5b42be44b157d315afc734d7d64937b265680f4c (HEAD -> main, origin/main, origin/HEAD)
+Author: FireDragonGameStudio <FireDragonGameStudio@users.noreply.github.com>
+Date:   Tue Jul 18 09:23:16 2023 +0200
+
+    update for Unity 2022.3
+
+    and little cleanup
+
+commit c9f90f871f9eaaaaf785100c2f51cfeb2915768f
+Author: FireDragonGameStudio <FireDragonGameStudio@users.noreply.github.com>
+Date:   Fri Nov 25 20:02:16 2022 +0100
+
+    small fixes
+
+    fix wall rotations; update to newer unity version
+
+commit 95532c9d73871885600b09193235db1d8be8a4b2
+Author: FireDragonGameStudio <FireDragonGameStudio@users.noreply.github.com>
+Date:   Wed Aug 10 23:40:15 2022 +0200
+
+    update readme
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main
+$ git init
+Initialized empty Git repository in C:/Users/jgim3/Documents/ARIndoorNavigation-main/.git/
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ ls -al
+total 41
+drwxr-xr-x 1 jgim3 197609    0 Nov 19 12:30 ./
+drwxr-xr-x 1 jgim3 197609    0 Nov 19 12:29 ../
+drwxr-xr-x 1 jgim3 197609    0 Nov 19 12:30 .git/
+-rw-r--r-- 1 jgim3 197609 1020 Nov 19 12:29 .gitignore
+-rw-r--r-- 1 jgim3 197609   99 Nov 19 12:29 .vsconfig
+drwxr-xr-x 1 jgim3 197609    0 Nov 19 12:29 Assets/
+-rw-r--r-- 1 jgim3 197609 1074 Nov 19 12:29 LICENSE
+drwxr-xr-x 1 jgim3 197609    0 Nov 19 12:29 Packages/
+drwxr-xr-x 1 jgim3 197609    0 Nov 19 12:29 ProjectSettings/
+-rw-r--r-- 1 jgim3 197609 1412 Nov 19 12:29 README.md
+drwxr-xr-x 1 jgim3 197609    0 Nov 19 12:29 UserSettings/
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+        .vsconfig
+        Assets/
+        LICENSE
+        Packages/
+        ProjectSettings/
+        README.md
+        UserSettings/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git add --all
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git commit -m "Forked from FireDragonGameStudio/ARIndoorNavigation"
+[master (root-commit) ee4bb4e] Forked from FireDragonGameStudio/ARIndoorNavigation
+ 214 files changed, 43824 insertions(+)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git remote add origin https://github.com/jgim30387/capstone2.git
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git remote -v
+origin  https://github.com/jgim30387/capstone2.git (fetch)
+origin  https://github.com/jgim30387/capstone2.git (push)
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git push -u origin master
+Enumerating objects: 252, done.
+Counting objects: 100% (252/252), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (251/251), done.
+Writing objects: 100% (252/252), 1.63 MiB | 726.00 KiB/s, done.
+Total 252 (delta 90), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (90/90), done.
+To https://github.com/jgim30387/capstone2.git
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ vim f1.txt
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git add f1.txt
+warning: in the working copy of 'f1.txt', LF will be replaced by CRLF the next time Git touches it
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git commit -am "add file"
+[master 5a48d22] add file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 f1.txt
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/ARIndoorNavigation-main (master)
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 260 bytes | 260.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/jgim30387/capstone2.git
+   ee4bb4e..5a48d22  master -> master
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~
+$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/jgim3/.ssh/id_rsa):
+Created directory '/c/Users/jgim3/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/jgim3/.ssh/id_rsa
+Your public key has been saved in /c/Users/jgim3/.ssh/id_rsa.pub
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~
+$ cd .ssh
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/.ssh
+$ ls
+id_rsa  id_rsa.pub
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/.ssh
+$ cat id_rsa.pub
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents
+$ git clone git@github.com:jgim30387/test.git fth
+Cloning into 'fth'...
+The authenticity of host 'github.com (20.200.245.247)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+remote: Enumerating objects: 31, done.
+remote: Counting objects: 100% (31/31), done.
+remote: Compressing objects: 100% (29/29), done.
+remote: Total 31 (delta 12), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (31/31), 15.19 KiB | 2.17 MiB/s, done.
+Resolving deltas: 100% (12/12), done.
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents
+$ cd fth
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/fth (main)
+$ vim f1.txt
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/fth (main)
+$ git add f1.txt
+warning: in the working copy of 'f1.txt', LF will be replaced by CRLF the next time Git touches it
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/fth (main)
+$ git commit -m "ver1"
+[main 2938eea] ver1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 f1.txt
+
+jgim3@LAPTOP-VF4REVRI MINGW64 ~/Documents/fth (main)
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 326 bytes | 326.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:jgim30387/test.git
+   4d72c1f..2938eea  main -> main
